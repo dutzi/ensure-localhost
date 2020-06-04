@@ -12,7 +12,10 @@ if (!host) {
 }
 
 lookup(host, function (err, address, family) {
-  if (address && address.split(':').pop() === '127.0.0.1') {
+  if (
+    address &&
+    (address.split(':').pop() === '127.0.0.1' || address === '::1')
+  ) {
     process.exit(0);
   } else {
     console.log(chalk.bgRed.bold.white('Hosts file not configured\n'));
